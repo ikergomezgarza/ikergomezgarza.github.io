@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Iker Gomez Garza · Finance & Python</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --navy:#0a1628;--navy2:#102040;--blue:#1a3a6b;--accent:#2563eb;--accent2:#1d4ed8;
+  --gold:#b8973a;--gold2:#d4af50;
+  --bg:#f8f9fc;--bg2:#f0f3f8;--bg3:#e8edf5;
+  --tx:#0a1628;--txm:#3d5278;--txd:#7a8fa8;
+  --bor:#dde3ef;--bor2:#c8d2e4;
+  --serif:'Playfair Display',serif;--sans:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--bg);color:var(--tx);font-size:14px;line-height:1.6;}
+
+.topbar{position:sticky;top:0;z-index:100;background:var(--navy);display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:52px;}
+.tlogo{color:#fff;font-family:var(--serif);font-size:16px;font-weight:400;letter-spacing:.08em;}
+.tlogo span{color:var(--gold2);}
+.tnav{display:flex;gap:2.5rem;}
+.tnav a{color:rgba(255,255,255,.5);text-decoration:none;font-size:12px;letter-spacing:.06em;text-transform:uppercase;transition:color .2s;}
+.tnav a:hover{color:#fff;}
+.tbadge{font-size:11px;padding:4px 12px;border:1px solid rgba(212,175,80,.4);color:var(--gold2);letter-spacing:.06em;text-transform:uppercase;}
+
+.hero{background:var(--navy);min-height:90vh;display:flex;flex-direction:column;justify-content:center;padding:7rem 2.5rem 5rem;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,80,.3),transparent);}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(37,99,235,.4),transparent);}
+.hero-eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);margin-bottom:2rem;display:flex;align-items:center;gap:.8rem;}
+.hero-eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--gold2);}
+.hero-name{font-family:var(--serif);font-size:clamp(3rem,6vw,5.5rem);font-weight:400;color:#fff;line-height:1.05;margin-bottom:.5rem;}
+.hero-name span{color:var(--gold2);}
+.hero-role{font-size:1rem;color:rgba(255,255,255,.4);letter-spacing:.14em;text-transform:uppercase;margin-bottom:2.5rem;font-weight:300;}
+.hero-divider{width:48px;height:1px;background:var(--gold2);margin-bottom:2.5rem;}
+.hero-desc{font-size:15px;color:rgba(255,255,255,.6);max-width:500px;line-height:1.9;margin-bottom:3.5rem;font-weight:300;}
+.btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:5rem;}
+.btn{font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:12px 28px;cursor:pointer;text-decoration:none;transition:all .25s;display:inline-block;font-weight:500;}
+.btn-p{background:var(--accent);color:#fff;border:1px solid var(--accent);}
+.btn-p:hover{background:var(--accent2);}
+.btn-o{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.25);}
+.btn-o:hover{border-color:rgba(255,255,255,.6);}
+.btn-g{background:transparent;color:var(--gold2);border:1px solid rgba(212,175,80,.4);}
+.btn-g:hover{background:rgba(212,175,80,.08);border-color:var(--gold2);}
+.hero-stats{display:flex;border:1px solid rgba(255,255,255,.1);width:fit-content;}
+.stat{padding:1.2rem 2rem;border-right:1px solid rgba(255,255,255,.1);}
+.stat:last-child{border-right:none;}
+.stat-val{font-family:var(--serif);font-size:2.2rem;color:#fff;line-height:1;}
+.stat-val span{font-size:1.2rem;color:var(--gold2);}
+.stat-label{font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.1em;text-transform:uppercase;margin-top:.3rem;}
+
+section{padding:6rem 2.5rem;border-bottom:1px solid var(--bor);}
+.sec-eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.8rem;display:flex;align-items:center;gap:.6rem;}
+.sec-eyebrow::before{content:'';display:block;width:20px;height:1px;background:var(--accent);}
+.sec-title{font-family:var(--serif);font-size:2rem;font-weight:400;color:var(--navy);margin-bottom:3.5rem;}
+
+.about-grid{display:grid;grid-template-columns:3fr 2fr;gap:4rem;align-items:start;}
+.about-text p{font-size:15px;line-height:1.95;color:var(--txm);margin-bottom:1.2rem;font-weight:300;}
+.about-card{background:var(--navy);padding:2rem;}
+.about-card-title{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold2);margin-bottom:1.5rem;}
+.detail-row{display:flex;flex-direction:column;gap:.2rem;padding:.7rem 0;border-bottom:1px solid rgba(255,255,255,.07);}
+.detail-row:last-child{border-bottom:none;}
+.detail-key{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);}
+.detail-val{font-size:13px;color:rgba(255,255,255,.8);}
+.detail-val a{color:var(--gold2);text-decoration:none;}
+.detail-val a:hover{text-decoration:underline;}
+
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;}
+.skill-cell{background:#fff;border:1px solid var(--bor);padding:1.8rem;}
+.skill-cat{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:1.2rem;padding-bottom:.8rem;border-bottom:1px solid var(--bor);}
+.skill-list{display:flex;flex-direction:column;gap:.5rem;}
+.skill-item{font-size:13px;color:var(--txm);display:flex;align-items:center;gap:.6rem;font-weight:300;}
+.skill-item::before{content:'';display:block;width:4px;height:4px;background:var(--accent);flex-shrink:0;}
+
+/* App banner */
+.app-banner{background:var(--navy);border:1px solid rgba(212,175,80,.2);padding:1.5rem 2rem;margin-bottom:3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.app-banner-text{color:rgba(255,255,255,.7);font-size:13px;font-weight:300;}
+.app-banner-text strong{color:var(--gold2);font-weight:500;}
+.app-banner-link{font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:10px 22px;color:var(--gold2);border:1px solid rgba(212,175,80,.4);text-decoration:none;transition:all .2s;white-space:nowrap;}
+.app-banner-link:hover{background:rgba(212,175,80,.08);border-color:var(--gold2);}
+
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;}
+.proj-card{background:#fff;border:1px solid var(--bor);padding:2rem;transition:all .25s;position:relative;}
+.proj-card:hover{border-color:var(--accent);box-shadow:0 4px 24px rgba(37,99,235,.08);}
+.proj-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--bor);}
+.proj-id{font-size:10px;letter-spacing:.12em;color:var(--txd);text-transform:uppercase;}
+.proj-badge{font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border:1px solid;}
+.badge-pe{color:var(--accent);border-color:rgba(37,99,235,.25);background:rgba(37,99,235,.04);}
+.badge-ib{color:var(--gold);border-color:rgba(184,151,58,.3);background:rgba(184,151,58,.04);}
+.badge-quant{color:#6b46c1;border-color:rgba(107,70,193,.25);background:rgba(107,70,193,.04);}
+.proj-name{font-family:var(--serif);font-size:1.2rem;font-weight:400;color:var(--navy);margin-bottom:.7rem;}
+.proj-desc{font-size:13px;color:var(--txm);line-height:1.75;margin-bottom:1.5rem;font-weight:300;}
+.proj-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+.tag{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--txd);background:var(--bg2);padding:3px 9px;border:1px solid var(--bor);}
+.proj-actions{display:flex;gap:.6rem;flex-wrap:wrap;}
+.proj-btn{font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:7px 14px;text-decoration:none;transition:all .2s;border:1px solid;}
+.proj-btn-live{color:#fff;background:var(--accent);border-color:var(--accent);}
+.proj-btn-live:hover{background:var(--accent2);}
+.proj-btn-gh{color:var(--txm);border-color:var(--bor);}
+.proj-btn-gh:hover{border-color:var(--accent);color:var(--accent);}
+
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+.contact-text p{font-size:15px;color:var(--txm);line-height:1.95;margin-bottom:1rem;font-weight:300;}
+.contact-links{display:flex;flex-direction:column;gap:.8rem;}
+.contact-link{display:flex;align-items:center;gap:1.5rem;padding:1rem 1.2rem;border:1px solid var(--bor);background:#fff;text-decoration:none;color:var(--tx);transition:all .2s;}
+.contact-link:hover{border-color:var(--accent);}
+.cl-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--txd);min-width:64px;}
+.cl-val{font-size:13px;color:var(--txm);}
+.contact-link:hover .cl-val{color:var(--accent);}
+
+footer{background:var(--navy);padding:2rem 2.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;}
+footer span{font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.06em;text-transform:uppercase;}
+footer .gold{color:var(--gold2);opacity:.7;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="tlogo">Iker <span>Gomez Garza</span></div>
+  <nav class="tnav">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="tbadge">Open to Internships</div>
+</div>
+
+<div class="hero" id="top">
+  <div class="hero-eyebrow">Finance · Python · Valencia</div>
+  <div class="hero-name">Iker<br><span>Gomez Garza</span></div>
+  <div class="hero-role">Economics · Universidad de Valencia</div>
+  <div class="hero-divider"></div>
+  <p class="hero-desc">Second-year Economics student building institutional-grade financial models from scratch — LBO, DCF, comps, accretion/dilution — all automated in Python with live market data.</p>
+  <div class="btns">
+    <a class="btn btn-p" href="https://ikergomezgarza-models.streamlit.app/" target="_blank">Launch App ↗</a>
+    <a class="btn btn-g" href="#contact">Get in Touch</a>
+    <a class="btn btn-o" href="https://github.com/ikergomezgarza" target="_blank">GitHub ↗</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-val">4</div><div class="stat-label">Live Models</div></div>
+    <div class="stat"><div class="stat-val">3</div><div class="stat-label">Data Sources</div></div>
+    <div class="stat"><div class="stat-val">2<span>Y</span></div><div class="stat-label">Econ @ UV</div></div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="sec-eyebrow">About</div>
+  <div class="sec-title">Who I Am</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a second-year Economics student at Universidad de Valencia with a focus on corporate finance and quantitative analysis. I taught myself Python to automate the models I was learning in class — and kept going.</p>
+      <p>My projects cover the full deal analysis toolkit: screening companies for LBO viability, running DCF valuations, building comps tables from live data, and modeling M&A accretion/dilution. All pulling real data from SEC EDGAR and Alpaca Markets, all built from first principles.</p>
+      <p>I'm looking for an internship in investment banking, private equity, or fintech where I can contribute from day one.</p>
+    </div>
+    <div class="about-card">
+      <div class="about-card-title">Personal Details</div>
+      <div class="detail-row"><div class="detail-key">Location</div><div class="detail-val">Valencia, Spain</div></div>
+      <div class="detail-row"><div class="detail-key">University</div><div class="detail-val">Universidad de Valencia</div></div>
+      <div class="detail-row"><div class="detail-key">Degree</div><div class="detail-val">Economics, 2nd Year</div></div>
+      <div class="detail-row"><div class="detail-key">Email</div><div class="detail-val"><a href="mailto:ikergogiga@gmail.com">ikergogiga@gmail.com</a></div></div>
+      <div class="detail-row"><div class="detail-key">GitHub</div><div class="detail-val"><a href="https://github.com/ikergomezgarza" target="_blank">ikergomezgarza ↗</a></div></div>
+      <div class="detail-row"><div class="detail-key">LinkedIn</div><div class="detail-val"><a href="https://linkedin.com/in/ikergomezgarza" target="_blank">Iker Gomez Garza ↗</a></div></div>
+      <div class="detail-row"><div class="detail-key">Languages</div><div class="detail-val">Spanish (native) · English (professional)</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="sec-eyebrow">Skills</div>
+  <div class="sec-title">Tech & Finance Stack</div>
+  <div class="skills-grid">
+    <div class="skill-cell">
+      <div class="skill-cat">Languages</div>
+      <div class="skill-list">
+        <div class="skill-item">Python</div>
+        <div class="skill-item">SQL (basic)</div>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cat">Libraries</div>
+      <div class="skill-list">
+        <div class="skill-item">pandas</div>
+        <div class="skill-item">numpy</div>
+        <div class="skill-item">requests</div>
+        <div class="skill-item">finvizfinance</div>
+        <div class="skill-item">streamlit</div>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cat">Data Sources</div>
+      <div class="skill-list">
+        <div class="skill-item">SEC EDGAR</div>
+        <div class="skill-item">Alpaca Markets API</div>
+        <div class="skill-item">Finviz Screener</div>
+        <div class="skill-item">FRED (Treasury)</div>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cat">Finance Models</div>
+      <div class="skill-list">
+        <div class="skill-item">LBO</div>
+        <div class="skill-item">DCF</div>
+        <div class="skill-item">Comps / EV Multiples</div>
+        <div class="skill-item">Accretion / Dilution</div>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cat">Concepts</div>
+      <div class="skill-list">
+        <div class="skill-item">EBITDA / FCF</div>
+        <div class="skill-item">WACC / Beta</div>
+        <div class="skill-item">Debt Scheduling</div>
+        <div class="skill-item">IRR / MoM</div>
+        <div class="skill-item">Peer Screening</div>
+      </div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cat">Tools</div>
+      <div class="skill-list">
+        <div class="skill-item">VS Code</div>
+        <div class="skill-item">Git / GitHub</div>
+        <div class="skill-item">Streamlit Cloud</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="sec-eyebrow">Projects</div>
+  <div class="sec-title">Financial Models</div>
+
+  <div class="app-banner">
+    <div class="app-banner-text">All models are <strong>live and interactive</strong> — run them on any ticker directly in the browser.</div>
+    <a class="app-banner-link" href="https://ikergomezgarza-models.streamlit.app/" target="_blank">Launch App ↗</a>
+  </div>
+
+  <div class="projects-grid">
+
+    <div class="proj-card">
+      <div class="proj-top"><span class="proj-id">Model 1 · LBO</span><span class="proj-badge badge-pe">Private Equity</span></div>
+      <div class="proj-name">Leveraged Buyout Model</div>
+      <div class="proj-desc">Full LBO pipeline pulling live SEC EDGAR data. Computes EBITDA, builds sources & uses, models a 5-year debt schedule with mandatory amortization and cash sweep, outputs IRR and MoM across a 6×6 entry/exit multiple sensitivity grid.</div>
+      <div class="proj-tags"><span class="tag">SEC EDGAR</span><span class="tag">Debt Schedule</span><span class="tag">IRR</span><span class="tag">Sensitivity</span></div>
+      <div class="proj-actions">
+        <a class="proj-btn proj-btn-live" href="https://ikergomezgarza-models.streamlit.app/LBO_model" target="_blank">Live App ↗</a>
+        <a class="proj-btn proj-btn-gh" href="https://github.com/ikergomezgarza" target="_blank">GitHub</a>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-top"><span class="proj-id">Model 2 · Accretion/Dilution</span><span class="proj-badge badge-ib">Investment Banking</span></div>
+      <div class="proj-name">Accretion / Dilution Analysis</div>
+      <div class="proj-desc">M&A analysis model evaluating whether an acquisition is accretive or dilutive to EPS, incorporating deal structure, synergies, and financing mix. Pulls live financials from SEC EDGAR for both acquirer and target.</div>
+      <div class="proj-tags"><span class="tag">M&A</span><span class="tag">EPS</span><span class="tag">Deal Structure</span><span class="tag">SEC EDGAR</span></div>
+      <div class="proj-actions">
+        <a class="proj-btn proj-btn-live" href="https://ikergomezgarza-models.streamlit.app/Accretion_Dilution_model" target="_blank">Live App ↗</a>
+        <a class="proj-btn proj-btn-gh" href="https://github.com/ikergomezgarza" target="_blank">GitHub</a>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-top"><span class="proj-id">Model 3 · Relative Valuation</span><span class="proj-badge badge-ib">Investment Banking</span></div>
+      <div class="proj-name">Relative Valuation / Comps</div>
+      <div class="proj-desc">Automated comps table screening peers by sector, industry, and index via Finviz, filtered by market cap and growth profile. Pulls live EV/EBITDA and EV/Revenue multiples from SEC EDGAR and Alpaca to derive implied valuations across peer groups.</div>
+      <div class="proj-tags"><span class="tag">Finviz</span><span class="tag">EV/EBITDA</span><span class="tag">Peer Screening</span><span class="tag">Alpaca</span></div>
+      <div class="proj-actions">
+        <a class="proj-btn proj-btn-live" href="https://ikergomezgarza-models.streamlit.app/Relative_Valuation_model" target="_blank">Live App ↗</a>
+        <a class="proj-btn proj-btn-gh" href="https://github.com/ikergomezgarza" target="_blank">GitHub</a>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-top"><span class="proj-id">Model 4 · DCF</span><span class="proj-badge badge-ib">Investment Banking</span></div>
+      <div class="proj-name">Discounted Cash Flow Model</div>
+      <div class="proj-desc">Intrinsic valuation model projecting free cash flows from live SEC EDGAR financials. Computes WACC using a calculated beta against SPY via Alpaca and the 10-year Treasury rate from FRED. Outputs intrinsic price vs market price with a full sensitivity grid across growth and discount rate assumptions.</div>
+      <div class="proj-tags"><span class="tag">WACC</span><span class="tag">Beta</span><span class="tag">Terminal Value</span><span class="tag">Sensitivity</span></div>
+      <div class="proj-actions">
+        <a class="proj-btn proj-btn-live" href="https://ikergomezgarza-models.streamlit.app/DCF_model" target="_blank">Live App ↗</a>
+        <a class="proj-btn proj-btn-gh" href="https://github.com/ikergomezgarza" target="_blank">GitHub</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact">
+  <div class="sec-eyebrow">Contact</div>
+  <div class="sec-title">Get in Touch</div>
+  <div class="contact-wrap">
+    <div class="contact-text">
+      <p>I'm actively looking for internship opportunities in investment banking, private equity, or fintech for summer 2026.</p>
+      <p>If you're working on something interesting or want to talk finance and Python, reach out.</p>
+    </div>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:ikergogiga@gmail.com">
+        <span class="cl-label">Email</span><span class="cl-val">ikergogiga@gmail.com</span>
+      </a>
+      <a class="contact-link" href="https://github.com/ikergomezgarza" target="_blank">
+        <span class="cl-label">GitHub</span><span class="cl-val">github.com/ikergomezgarza</span>
+      </a>
+      <a class="contact-link" href="https://linkedin.com/in/ikergomezgarza" target="_blank">
+        <span class="cl-label">LinkedIn</span><span class="cl-val">Iker Gomez Garza</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Iker Gomez Garza · 2026</span>
+  <span class="gold">Universidad de Valencia · Economics</span>
+</footer>
+
+</body></html>
